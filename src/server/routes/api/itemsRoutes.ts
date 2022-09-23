@@ -5,7 +5,7 @@ import { NewItem, NewItemReqBody, UpdateItem, updateItemReqBody } from "../../ty
 
 const itemsRouter = express.Router();
 
-//curent path is /api/Items
+//curent path is /api/items
 
 //gets all Items
 itemsRouter.get("/", async (req, res) => {

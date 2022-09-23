@@ -4,7 +4,7 @@ import ItemIngredientsQueries from "../../database/queries/ItemIngredientsQuerie
 
 const IngredientsRouter = express.Router();
 
-//current path is /api
+//current path is /api/ingredients
 //get all ingredients
 IngredientsRouter.get("/", async (req, res) => {
   try {
@@ -41,7 +41,7 @@ IngredientsRouter.post("/", async (req, res) => {
   const newIngredient = { name };
   try {
     const createIngredient = await Ingredients.createOneIngredient(newIngredient);
-    res.json({ msg: "The Ingredient has been created successfully" });
+    res.json({ msg: "The Ingredient has been created successfully", id: createIngredient.insertId });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "a createOneIngredient error occured" });
