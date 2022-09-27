@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Ingredients } from "../../types";
 import { apiService } from "../../services/apiService";
 
-const CreateIngredients = ({ editMode }: FormProps) => {
+const CreateOREditIngredients = ({ editMode }: FormProps) => {
   const [editIngredient, setEditIngredient] = useState<Ingredients>({ name: "" });
 
   const nav = useNavigate();
@@ -54,4 +54,4 @@ interface FormProps {
   editMode?: boolean;
 }
 
-export default CreateIngredients;
+export default CreateOREditIngredients;

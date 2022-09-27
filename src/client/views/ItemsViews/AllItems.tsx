@@ -27,7 +27,7 @@ const AllItems = () => {
             <div>{item.currentQuantity}</div>
           </Link>;
         })}
-        <Link to={`/NewItem`}>Add an Item to the list</Link>
+        <Link to={`/admin/Items/new`}>Add an Item to the list</Link>
       </div>
     </>
   );

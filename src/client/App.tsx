@@ -6,8 +6,8 @@ import CreateIngredients from "./views/IngredientsViews/CreateOREditIngredient";
 import SingleIngredients from "./views/IngredientsViews/SingleIngredient";
 
 import AllItems from "./views/ItemsViews/AllItems";
-import CreateItems from "./views/ItemsViews/CreateItem";
-import EditItems from "./views/ItemsViews/EditItem";
+import CreateItems from "./views/ItemsViews/CreateOREditItem";
+
 import SingleItems from "./views/ItemsViews/SingleItem";
 
 import { Routes, Route } from "react-router-dom";
@@ -19,7 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/admin/Items" element={<AllItems />} />
           <Route path="/admin/Items/new" element={<CreateItems />} />
-          <Route path="/admin/Items/edit/:id" element={<EditItems />} />
+          <Route path="/admin/Items/edit/:id" element={<CreateItems editMode />} />
           <Route path="/admin/Items/:id" element={<SingleItems />} />
 
           <Route path="/admin/Ingredients" element={<AllIngredients />} />

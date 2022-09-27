@@ -22,7 +22,7 @@ const AllIngredients = () => {
             <div>{ingredient.name}</div>
           </Link>;
         })}
-        <Link to={`/NewIngredient`}>Add an Ingredient to the list</Link>
+        <Link to={`/admin/Ingredients/new`}>Add an Ingredient to the list</Link>
       </div>
     </>
   );
