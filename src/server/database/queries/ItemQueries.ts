@@ -4,7 +4,7 @@ import { Items, ItemsWithIngredients, UpdateItem, NewItem } from "../../types";
 //! might update to include ItemIngredientIDs
 const getOneItem = (id: number) =>
   query<ItemsWithIngredients[]>(
-    `select IT.*, group_concat(ING.name) as ingredients from Items as IT
+    `select IT.*, group_concat(ING.name) as ingredients, group_concat(ING.id) as ingredientsID from Items as IT
 join ItemIngredients as ITIN on ITIN.itemID = IT.id
 join Ingredients as ING on ITIN.ingredientID = ING.id
 Where IT.id =?
