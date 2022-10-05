@@ -22,11 +22,14 @@ const CreateItems = ({ editMode }: FormProps) => {
     } else {
       apiService(`/api/items/${id}`)
         .then((item) => {
-          item["ingredientsID"] = item["ingredientsID"].split(",").map((id: string) => ({
-            value: Number(id),
-            label: ingredients.filter((ingredient) => ingredient.id === Number(id))[0]?.name || "",
-          }));
-          console.log(item);
+          // item["ingredientsID"] = item["ingredientsID"].split(",").map((id: string) => ({
+          //   value: Number(id),
+          //   label: ingredients.filter((ingredient) => ingredient.id === Number(id))[0]?.name || "",
+          // }));
+          item["ingredientsID"] = item["ingredientsID"].split(",").map((id: string) => {
+            return Number(id);
+          });
+          // console.log(item);
           setEditItem(item);
         })
         .catch((error) => console.log(error));
@@ -36,7 +39,7 @@ const CreateItems = ({ editMode }: FormProps) => {
   useEffect(() => {
     //this fetches all the ingredients info
     apiService(`/api/ingredients`)
-      .then((ingredient) => setIngredients(ingredient))
+      .then((ingredients) => setIngredients(ingredients.map((ing) => ({ value: ing.id, label: ing.name })) as []))
       .catch((error) => console.log(error));
   }, []);
 
@@ -46,8 +49,9 @@ const CreateItems = ({ editMode }: FormProps) => {
       label: string;
     }>
   ) => {
-    const ingredientsID = e.map((selectedItemIngredient) => selectedItemIngredient.value) as number[];
-    // setEditItem({ ...editItem, ingredientsID });
+    const ingredientsID = e.map((selectedItemIngredient) => selectedItemIngredient.value || selectedItemIngredient) as number[];
+    console.log(e);
+    setEditItem({ ...editItem, ingredientsID });
     console.log(ingredientsID);
   };
 
@@ -80,13 +84,13 @@ const CreateItems = ({ editMode }: FormProps) => {
             <label>Item Description</label>
             <input className="form-control" type="text" placeholder="Enter Decription here" value={editItem.description} name="description" onChange={handleUpdateForm}></input>
             <ReactSelect
-              value={editItem.ingredientsID}
+              defaultValue={editItem.ingredientsID}
               isMulti
               onChange={(e) => {
+                // @ts-ignore
                 handleItemIngredient(e);
-                console.log(e);
               }}
-              options={ingredients.map((ing) => ({ value: ing.id, label: ing.name }))}
+              options={ingredients as []}
             />
 
             <label>Item Price</label>
