@@ -1,14 +1,14 @@
 import * as React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { NewItem, Ingredients, NewItemReqBody } from "../../types";
+import { NewItem, Ingredients, NewItemReqBody, ReactSelectIngredients } from "../../types";
 import { apiService } from "../../services/apiService";
 import { MultiValue } from "react-select";
 import ReactSelect from "react-select";
 
 const CreateItems = ({ editMode }: FormProps) => {
   const [editItem, setEditItem] = useState<NewItemReqBody>({ name: "", description: "", price: 0, maxQuantity: 0, currentQuantity: 0, ingredientsID: [] });
-  const [ingredients, setIngredients] = useState<Ingredients[]>([]);
+  const [ingredients, setIngredients] = useState<ReactSelectIngredients[]>([]);
   const [itemIngredients, setItemIngredients] = useState<Ingredients[]>([]);
 
   const nav = useNavigate();
@@ -39,7 +39,7 @@ const CreateItems = ({ editMode }: FormProps) => {
   useEffect(() => {
     //this fetches all the ingredients info
     apiService(`/api/ingredients`)
-      .then((ingredients) => setIngredients(ingredients.map((ing) => ({ value: ing.id, label: ing.name })) as []))
+      .then((ingredients: Ingredients[]) => setIngredients(ingredients.map((ing) => ({ value: ing.id, label: ing.name })) as []))
       .catch((error) => console.log(error));
   }, []);
 
@@ -84,12 +84,12 @@ const CreateItems = ({ editMode }: FormProps) => {
             <label>Item Description</label>
             <input className="form-control" type="text" placeholder="Enter Decription here" value={editItem.description} name="description" onChange={handleUpdateForm}></input>
             <ReactSelect
-              defaultValue={editItem.ingredientsID}
               isMulti
-              onChange={(e) => {
-                // @ts-ignore
-                handleItemIngredient(e);
-              }}
+              value={editItem.ingredientsID!.map((ingID) => {
+                const [matchedIngredient] = ingredients.filter((ing) => ing.value === ingID);
+                return matchedIngredient;
+              })}
+              onChange={handleItemIngredient}
               options={ingredients as []}
             />
 

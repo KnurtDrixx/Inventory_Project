@@ -59,3 +59,8 @@ export interface Ingredients {
   id?: number;
   name: string;
 }
+
+export interface ReactSelectIngredients {
+  value: Ingredients["id"];
+  label: Ingredients["name"];
+}
