@@ -41,7 +41,7 @@ export interface updateItemReqBody extends UpdateItem {
 }
 
 export interface ItemsWithIngredients extends Items {
-  ingredients: string;
+  ingredients?: string[];
 }
 
 export interface Users {

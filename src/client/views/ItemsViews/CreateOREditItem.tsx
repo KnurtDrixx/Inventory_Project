@@ -59,6 +59,25 @@ const CreateItems = ({ editMode }: FormProps) => {
     setEditItem({ ...editItem, [e.target.name]: e.target.value });
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || !e.target.files[0]) {
+      return;
+    }
+    //at this point e.target.files exist
+
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("Food Photo", file);
+    fetch("/uploads", { method: "POST", body: formData })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const submitItemChanges = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const method = !editMode ? "POST" : "PUT";
@@ -77,7 +96,7 @@ const CreateItems = ({ editMode }: FormProps) => {
       <h1>{!editMode ? `Add an Item` : `Edit an Item`}</h1>
       <div className="row justify-content-center">
         <div className="col-12 col-md-6">
-          <form>
+          <form className="form-control">
             <label>Item Name</label>
             <input className="form-control" type="text" placeholder="Enter Item here" value={editItem.name} name="name" onChange={handleUpdateForm}></input>
 
@@ -96,9 +115,9 @@ const CreateItems = ({ editMode }: FormProps) => {
             <label>Item Price</label>
             <input className="form-control" type="number" placeholder="Enter Price here" value={editItem.price} name="price" onChange={handleUpdateForm}></input>
 
-            {/* <label>Display Image</label> */}
+            <label>Display Image</label>
             {/* Add file functionality here */}
-            {/* <input className="form-control" type="file" placeholder="Enter Item here" value={editItem.displayImage} name="name" onChange={handleUpdateForm}></input> */}
+            <input className="form-control" type="file" name="name" onChange={handleImageUpload}></input>
 
             <label>Max Item Quantity</label>
             <input className="form-control" type="number" placeholder="Enter Max Quantity here" value={editItem.maxQuantity} name="maxQuantity" onChange={handleUpdateForm}></input>

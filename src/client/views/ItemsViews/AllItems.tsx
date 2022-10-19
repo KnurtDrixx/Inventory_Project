@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { apiService } from "../../services/apiService";
-import { Items } from "../../types";
+import { Items, ItemsWithIngredients } from "../../types";
 import { Link } from "react-router-dom";
 
 const AllItems = () => {
-  const [items, setItems] = useState<Items[]>([]);
+  const [items, setItems] = useState<ItemsWithIngredients[]>([]);
 
   useEffect(() => {
     apiService("/api/items")
@@ -17,16 +17,19 @@ const AllItems = () => {
     <>
       <div>
         <h1>Items List</h1>
-        {items.map((item) => {
-          <Link to={`items/${item.id}`}>
-            <div>{item.name}</div>
+        {items.map((item) => (
+          <div>
+            <Link to={`/admin/Items/${item.id}`}>
+              <div>{item.name}</div>
+            </Link>
             <div>{item.description}</div>
-            <div>{item.price}</div>
+            <div>Contains: {item ? item.ingredients!.join(", ") : "loading ingredients"}</div>
+            <div>Price: ${item.price}</div>
             <div>{item.displayImage}</div>
-            <div>{item.maxQuantity}</div>
-            <div>{item.currentQuantity}</div>
-          </Link>;
-        })}
+            <div>Max Quantity: {item.maxQuantity}</div>
+            <div>Current Quantity: {item.currentQuantity}</div>
+          </div>
+        ))}
         <Link to={`/admin/Items/new`}>Add an Item to the list</Link>
       </div>
     </>

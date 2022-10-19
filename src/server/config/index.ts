@@ -8,3 +8,8 @@ export const sqlConfig = {
   host: process.env.DB_HOST!,
   database: process.env.DB_DATABASE!,
 };
+
+export const S3Config = {
+  AccessKeyID: process.env.ACCESS_KEY_ID!,
+  SecretKey: process.env.SECRET_KEY!,
+};

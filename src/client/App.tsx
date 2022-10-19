@@ -11,11 +11,13 @@ import CreateItems from "./views/ItemsViews/CreateOREditItem";
 import SingleItems from "./views/ItemsViews/SingleItem";
 
 import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <main>
       <div>
+        <Navbar />
         <Routes>
           <Route path="/admin/Items" element={<AllItems />} />
           <Route path="/admin/Items/new" element={<CreateItems />} />

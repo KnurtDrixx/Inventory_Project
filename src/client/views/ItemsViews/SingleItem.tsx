@@ -13,6 +13,7 @@ const SingleItems = () => {
       .then((item) => setItem(item))
       .catch((error) => console.log(error));
   }, []);
+  //! add ingredients to be displayed for single item
 
   return (
     <>
