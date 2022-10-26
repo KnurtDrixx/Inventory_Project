@@ -2,6 +2,7 @@ import * as express from "express";
 import Items from "../../database/queries/ItemQueries";
 import ItemIngredients from "../../database/queries/ItemIngredientsQueries";
 import { NewItem, NewItemReqBody, UpdateItem, updateItemReqBody } from "../../types";
+import isValidToken from "../../utilities/tokenCheck";
 
 const itemsRouter = express.Router();
 
@@ -44,7 +45,7 @@ itemsRouter.get("/:id", async (req, res) => {
 
 //create an item
 //add token check middleware
-itemsRouter.post("/", async (req, res) => {
+itemsRouter.post("/", isValidToken, async (req, res) => {
   const { name, description, price, displayImage, maxQuantity, currentQuantity, ingredientsID }: NewItemReqBody = req.body;
   if (!name) return res.status(400).json({ msg: "Please provide a name for the item." });
   if (!description) return res.status(400).json({ msg: "Please provide a description for the item." });
@@ -76,7 +77,7 @@ itemsRouter.post("/", async (req, res) => {
 //edit an item
 //add token check middleware
 //add ability to add or remove ingredients?
-itemsRouter.put("/:id", async (req, res) => {
+itemsRouter.put("/:id", isValidToken, async (req, res) => {
   const id = Number(req.params.id);
   const { name, description, price, displayImage, maxQuantity, currentQuantity, ingredientsID }: updateItemReqBody = req.body;
   const updateItem: UpdateItem = {};
@@ -109,7 +110,7 @@ itemsRouter.put("/:id", async (req, res) => {
 
 //delete an item
 //add token check middleware
-itemsRouter.delete("/:id", async (req, res) => {
+itemsRouter.delete("/:id", isValidToken, async (req, res) => {
   const id = Number(req.params.id);
   try {
     await ItemIngredients.deleteOneByItemID(id);

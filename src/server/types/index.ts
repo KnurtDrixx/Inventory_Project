@@ -39,7 +39,7 @@ export interface ItemsWithIngredients extends Items {
 }
 
 export interface Users {
-  id: number;
+  id?: number;
   email: string;
   password: string;
 }
@@ -52,4 +52,18 @@ export interface ItemIngredients {
 export interface Ingredients {
   id?: number;
   name: string;
+}
+
+export {};
+declare global {
+  namespace Express {
+    interface Request {
+      payload: Payload;
+    }
+  }
+}
+
+export interface Payload {
+  id: number;
+  email: string;
 }

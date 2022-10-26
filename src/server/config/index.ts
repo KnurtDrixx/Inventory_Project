@@ -13,3 +13,7 @@ export const S3Config = {
   AccessKeyID: process.env.ACCESS_KEY_ID!,
   SecretKey: process.env.SECRET_KEY!,
 };
+
+export const jwt = {
+  SECRET_KEY: process.env.JWT_SECRET!,
+};

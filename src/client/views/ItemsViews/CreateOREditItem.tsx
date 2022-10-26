@@ -71,6 +71,7 @@ const CreateItems = ({ editMode }: FormProps) => {
     fetch("/uploads", { method: "POST", body: formData })
       .then((res) => res.json())
       .then((res) => {
+        setEditItem({ ...editItem, displayImage: res.url });
         console.log(res);
       })
       .catch((error) => {

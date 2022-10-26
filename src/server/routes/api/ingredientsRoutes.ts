@@ -1,6 +1,7 @@
 import * as express from "express";
 import Ingredients from "../../database/queries/IngredientsQueries";
 import ItemIngredientsQueries from "../../database/queries/ItemIngredientsQueries";
+import isValidToken from "../../utilities/tokenCheck";
 
 const IngredientsRouter = express.Router();
 
@@ -33,7 +34,7 @@ IngredientsRouter.get("/:id", async (req, res) => {
 });
 
 //create an ingredient
-IngredientsRouter.post("/", async (req, res) => {
+IngredientsRouter.post("/", isValidToken, async (req, res) => {
   const { name } = req.body;
   if (!name) return res.status(400).json({ msg: "Please provide a name for the item." });
   //at this point the name of the ingredient exists
@@ -49,7 +50,7 @@ IngredientsRouter.post("/", async (req, res) => {
 });
 
 //edit an ingredient
-IngredientsRouter.put("/:id", async (req, res) => {
+IngredientsRouter.put("/:id", isValidToken, async (req, res) => {
   const id = Number(req.params.id);
 
   const { name } = req.body;
@@ -66,7 +67,7 @@ IngredientsRouter.put("/:id", async (req, res) => {
 });
 
 //delete an ingredient
-IngredientsRouter.delete("/:id", async (req, res) => {
+IngredientsRouter.delete("/:id", isValidToken, async (req, res) => {
   const id = Number(req.params.id);
   try {
     await ItemIngredientsQueries.deleteOneByIngredientID(id);

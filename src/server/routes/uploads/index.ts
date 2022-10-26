@@ -25,6 +25,7 @@ uploadsRouter.post("/", uploader.single("Food Photo"), async (req, res) => {
     res.status(200).json({ msg: "file uploaded successfully", url: uploadResults.Location });
   } catch (error) {
     res.status(500).json({ msg: "Error uploading file" });
+    console.log(error);
   }
 });
 
