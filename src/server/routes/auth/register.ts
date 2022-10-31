@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from "express";
 import passwordUtils from "../../utilities/passwords";
 import userQuery from "../../database/queries/UserQueries";
 import tokenUtils from "../../utilities/token";

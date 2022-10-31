@@ -30,7 +30,7 @@ const Navbar = () => {
       </NavLink>
       {/*    )} */}
       {/* {!isLoggedIn && ( */}
-      <NavLink to="/Login" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
+      <NavLink to="/admin/login" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
         Login/Register
       </NavLink>
       {/* )} */}

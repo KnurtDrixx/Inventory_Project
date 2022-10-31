@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from "express";
 import loginRouter from "./login";
 import registerRouter from "./register";
 

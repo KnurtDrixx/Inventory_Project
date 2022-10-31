@@ -10,6 +10,8 @@ import CreateItems from "./views/ItemsViews/CreateOREditItem";
 
 import SingleItems from "./views/ItemsViews/SingleItem";
 
+import LoginPage from "./views/loginRegister";
+
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
@@ -28,6 +30,8 @@ const App = () => {
           <Route path="/admin/Ingredients/new" element={<CreateIngredients />} />
           <Route path="/admin/Ingredients/edit/:id" element={<CreateIngredients editMode />} />
           <Route path="/admin/Ingredients/:id" element={<SingleIngredients />} />
+
+          <Route path="/admin/login" element={<LoginPage />} />
         </Routes>
       </div>
     </main>

@@ -1,8 +1,9 @@
 import { IFetchOptions } from "../types";
+export const TOKENKEY = "token";
 
 export async function apiService<T = any>(uri: string, method: string = "GET", data?: any) {
   // retreive token from storage
-  const TOKEN = localStorage.getItem("token");
+  const TOKEN = localStorage.getItem(TOKENKEY);
   // prepare a headers object to build
   const headers: HeadersInit = {
     "Content-Type": "application/json",
@@ -31,7 +32,7 @@ export async function apiService<T = any>(uri: string, method: string = "GET", d
   try {
     // make that fetch like usual
     const res = await fetch(uri, fetchOptions);
-
+    const data = await res.json();
     // custom error handling is useful when you're learning
     if (res.status === 400) {
       throw new Error("check fetch options for any errors");
@@ -52,7 +53,9 @@ export async function apiService<T = any>(uri: string, method: string = "GET", d
     // only attempt to parse the response json
     // if the fetch gets a good status code e.g. 200/201
     if (res.ok) {
-      return <T>await res.json();
+      return <T>data;
+    } else {
+      throw new Error(data.message);
     }
   } catch (error) {
     console.error("[error]", error.message);
