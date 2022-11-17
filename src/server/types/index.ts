@@ -67,3 +67,14 @@ export interface Payload {
   id: number;
   email: string;
 }
+
+export interface ItemTotal {
+  total: number;
+}
+
+export interface CartItem {
+  id: number;
+  quantity: number;
+}
+
+export type Cart = CartItem[];

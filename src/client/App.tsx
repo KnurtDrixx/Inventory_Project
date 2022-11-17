@@ -14,6 +14,7 @@ import LoginPage from "./views/loginRegister";
 
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import PrivateWrapper from "./components/PrivateWrapper";
 
 const App = () => {
   return (
@@ -22,14 +23,46 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/admin/Items" element={<AllItems />} />
-          <Route path="/admin/Items/new" element={<CreateItems />} />
-          <Route path="/admin/Items/edit/:id" element={<CreateItems editMode />} />
           <Route path="/admin/Items/:id" element={<SingleItems />} />
 
+          <Route
+            path="/admin/Items/new"
+            element={
+              <PrivateWrapper>
+                <CreateItems />
+              </PrivateWrapper>
+            }
+          />
+
+          <Route
+            path="/admin/Items/edit/:id"
+            element={
+              <PrivateWrapper>
+                <CreateItems editMode />
+              </PrivateWrapper>
+            }
+          />
+
           <Route path="/admin/Ingredients" element={<AllIngredients />} />
-          <Route path="/admin/Ingredients/new" element={<CreateIngredients />} />
-          <Route path="/admin/Ingredients/edit/:id" element={<CreateIngredients editMode />} />
           <Route path="/admin/Ingredients/:id" element={<SingleIngredients />} />
+
+          <Route
+            path="/admin/Ingredients/new"
+            element={
+              <PrivateWrapper>
+                <CreateIngredients />
+              </PrivateWrapper>
+            }
+          />
+
+          <Route
+            path="/admin/Ingredients/edit/:id"
+            element={
+              <PrivateWrapper>
+                <CreateIngredients editMode />
+              </PrivateWrapper>
+            }
+          />
 
           <Route path="/admin/login" element={<LoginPage />} />
         </Routes>

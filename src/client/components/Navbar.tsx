@@ -5,19 +5,19 @@ import { NavLink, useLocation } from "react-router-dom";
 import { apiService } from "../services/apiService";
 
 const Navbar = () => {
-  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  //const loq = useLocation();
+  const loq = useLocation();
 
-  //   useEffect(() => {
-  //     apiService("/auth/verify")
-  //       .then((data) => {
-  //         setIsLoggedIn(true);
-  //       })
-  //       .catch((error) => {
-  //         setIsLoggedIn(false);
-  //       });
-  //   }, [loq.pathname]);
+  useEffect(() => {
+    apiService("/auth/verify")
+      .then((data) => {
+        setIsLoggedIn(true);
+      })
+      .catch((error) => {
+        setIsLoggedIn(false);
+      });
+  }, [loq.pathname]);
 
   return (
     <nav className="nav nav-pills p-2 shadow">

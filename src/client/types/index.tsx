@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface IFetchOptions {
   method: string;
   headers?: HeadersInit;
@@ -63,4 +65,8 @@ export interface Ingredients {
 export interface ReactSelectIngredients {
   value: Ingredients["id"];
   label: Ingredients["name"];
+}
+
+export interface PrivateWrapperProps {
+  children: React.ReactChild;
 }
