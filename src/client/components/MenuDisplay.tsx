@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import LocalStorageHandler from "../services/LocalStorageHandler";
 import { ItemsWithIngredients } from "../types";
+import { Link } from "react-router-dom";
 
 const Menu = ({ item, isAdmin, hasChecked }: { item: ItemsWithIngredients; isAdmin: boolean; hasChecked: boolean }) => {
   const cart = LocalStorageHandler.getCartFromStorage();
@@ -32,7 +33,11 @@ const Menu = ({ item, isAdmin, hasChecked }: { item: ItemsWithIngredients; isAdm
           {hasBeenUpdated ? "Update Cart" : "Add to cart"}
         </button>
 
-        {hasChecked && isAdmin && <button className="btn btn-warning">Edit Item</button>}
+        {hasChecked && isAdmin && (
+          <Link to={"/admin/Items/edit/:id"} className="btn btn-warning">
+            Edit Item
+          </Link>
+        )}
         {hasChecked && isAdmin && <div>Current Quantity: {item.currentQuantity}</div>}
         {hasChecked && isAdmin && <div>Max Quantity: {item.maxQuantity}</div>}
       </div>

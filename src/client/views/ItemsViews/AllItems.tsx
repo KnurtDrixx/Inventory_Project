@@ -36,8 +36,7 @@ const AllItems = () => {
             </div>
           ))}
         </div>
-
-        <Link to={`/admin/Items/new`}>Add an Item to the list</Link>
+        {hasChecked && isAdmin && <Link to={`/admin/Items/new`}>Add an Item to the list</Link>}
       </div>
     </>
   );
