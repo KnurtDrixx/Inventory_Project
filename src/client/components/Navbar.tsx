@@ -1,4 +1,4 @@
-//! to do. make navbar
+// to do. make navbar
 import React from "react";
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
@@ -34,6 +34,9 @@ const Navbar = () => {
         Login/Register
       </NavLink>
       {/* )} */}
+      <NavLink to="/admin/checkout" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
+        Checkout
+      </NavLink>
     </nav>
   );
 };

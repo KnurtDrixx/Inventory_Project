@@ -14,7 +14,7 @@ const squareClient = new Client({ accessToken: square.SQUARE_ACCESS_TOKEN, envir
 
 checkoutRouter.post("/", async (req, res) => {
   const cart: Cart = req.body.cart;
-  const sourceId: TokenResult = req.body.sourceID;
+  const sourceId: TokenResult = req.body.sourceId;
 
   if (!cart || !cart.length) {
     return res.status(400).json({ msg: "You need to put the food in the cart" });
@@ -28,11 +28,22 @@ checkoutRouter.post("/", async (req, res) => {
       if (ItemPrice) sum += ItemPrice.total;
     }
 
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description
+    // https://github.com/GoogleChromeLabs/jsbi/issues/30#issuecomment-953187833
+
+    interface BigInt extends BigIntConstructor {
+      toJSON: () => string;
+    }
+
+    (BigInt as BigInt).prototype["toJSON"] = function () {
+      return this.toString();
+    };
+
     const body: CreatePaymentRequest = { sourceId: sourceId.token!, idempotencyKey: randomUUID(), amountMoney: { amount: BigInt(sum * 100), currency: "USD" } };
     //this makes the payment request
-    const results = await squareClient.paymentsApi.createPayment(body);
+    const { result } = await squareClient.paymentsApi.createPayment(body);
 
-    res.json(results);
+    res.json(result);
     //at this point we know how much money the items in the cart cost
   } catch (error) {
     res.status(500).json({ msg: "Error when adding price of cart items" });

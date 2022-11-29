@@ -117,14 +117,14 @@ const CreateItems = ({ editMode }: FormProps) => {
             <input className="form-control" type="number" placeholder="Enter Price here" value={editItem.price} name="price" onChange={handleUpdateForm}></input>
 
             <label>Display Image</label>
-            {/* Add file functionality here */}
+
             <input className="form-control" type="file" name="name" onChange={handleImageUpload}></input>
 
             <label>Max Item Quantity</label>
-            <input className="form-control" type="number" placeholder="Enter Max Quantity here" value={editItem.maxQuantity} name="maxQuantity" onChange={handleUpdateForm}></input>
+            <input className="form-control" type="number" min={0} placeholder="Enter Max Quantity here" value={editItem.maxQuantity} name="maxQuantity" onChange={handleUpdateForm}></input>
 
             <label>Current Item Quantity</label>
-            <input className="form-control" type="number" placeholder="Enter Current Quantity here" value={editItem.currentQuantity} name="currentQuantity" onChange={handleUpdateForm}></input>
+            <input className="form-control" type="number" min={0} placeholder="Enter Current Quantity here" value={editItem.currentQuantity} name="currentQuantity" onChange={handleUpdateForm}></input>
             <button className="btn btn-success" onClick={submitItemChanges}>
               {!editMode ? `Create Item` : `Save Changes to Item`}
             </button>

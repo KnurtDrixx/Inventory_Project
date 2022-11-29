@@ -32,11 +32,13 @@ const LoginPage = () => {
           <button onClick={() => setIsLoggingIn(!isLoggingIn)} type="button" className="btn btn-primary m-3">
             Switch to {!isLoggingIn ? "Login" : "Register"}
           </button>
-          <label>Username</label>
-          <input className="form-control" type="email" value={userEmail} onChange={(e) => setUserEmail(e.target.value)}></input>
-          <label>Password</label>
-          <input className="form-control" type="password" value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></input>
-          <button onClick={() => handleLoginRegister()}></button>
+          <div>
+            <label>Username</label>
+            <input className="form-control" type="email" value={userEmail} onChange={(e) => setUserEmail(e.target.value)}></input>
+            <label>Password</label>
+            <input className="form-control" type="password" value={userPassword} onChange={(e) => setUserPassword(e.target.value)}></input>
+            <button onClick={() => handleLoginRegister()}>{isLoggingIn ? "Login" : "Register"}</button>
+          </div>
         </div>
       </div>
     </>

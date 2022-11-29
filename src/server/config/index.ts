@@ -15,17 +15,23 @@ export const S3Config = {
 };
 
 export const jwt = {
-  SECRET_KEY: process.env.JWT_SECRET!,
+  SECRET_KEY: process.env.JWT_SECRET_KEY!,
 };
 
 // export const stripe = {
 //   SECRET_KEY: process.env.STRIPE_SECRET_KEY!,
 // };
 
+const { SQUARE_APP_ID, SQUARE_ACCESS_TOKEN, SQUARE_API_VERSION, SQUARE_APP_NAME, SQUARE_LOCATION_ID } = process.env;
+
+if (!SQUARE_APP_ID || !SQUARE_ACCESS_TOKEN || !SQUARE_API_VERSION || !SQUARE_APP_NAME || !SQUARE_LOCATION_ID) {
+  throw new Error("Some required environment variables are undefined [database config]");
+}
+
 export const square = {
-  SQUARE_APP_ID: process.env.SQUARE_APP_ID,
-  SQUARE_ACCESS_TOKEN: process.env.SQUARE_ACCESS_TOKEN,
-  SQUARE_API_VERSION: process.env.SQUARE_API_VERSION,
-  SQUARE_APP_NAME: process.env.SQUARE_APP_NAME,
-  SQUARE_LOCATION_ID: process.env.SQUARE_LOCATION_ID,
+  SQUARE_APP_ID,
+  SQUARE_ACCESS_TOKEN,
+  SQUARE_API_VERSION,
+  SQUARE_APP_NAME,
+  SQUARE_LOCATION_ID,
 };

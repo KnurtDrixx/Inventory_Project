@@ -15,6 +15,7 @@ import LoginPage from "./views/loginRegister";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import PrivateWrapper from "./components/PrivateWrapper";
+import Checkout from "./views/CheckOut";
 
 const App = () => {
   return (
@@ -65,6 +66,8 @@ const App = () => {
           />
 
           <Route path="/admin/login" element={<LoginPage />} />
+
+          <Route path="/admin/checkout" element={<Checkout />} />
         </Routes>
       </div>
     </main>
