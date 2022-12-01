@@ -24,7 +24,6 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/admin/Items" element={<AllItems />} />
-          <Route path="/admin/Items/:id" element={<SingleItems />} />
 
           <Route
             path="/admin/Items/new"

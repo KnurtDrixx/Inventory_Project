@@ -23,8 +23,6 @@ const AllItems = () => {
 
   //at this point the item data has been fetched and the user has been verified.
 
-  //!Make a menu screen that displays the name, price, image,
-
   return (
     <>
       <div>
