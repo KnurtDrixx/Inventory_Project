@@ -24,16 +24,16 @@ const Navbar = () => {
       <NavLink to="/admin/Items" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
         Items
       </NavLink>
-      {/* {isLoggedIn && ( */}
-      <NavLink to="/admin/Ingredients" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
-        Ingredients
-      </NavLink>
-      {/*    )} */}
-      {/* {!isLoggedIn && ( */}
-      <NavLink to="/admin/login" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
-        Login/Register
-      </NavLink>
-      {/* )} */}
+      {isLoggedIn && (
+        <NavLink to="/admin/Ingredients" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
+          Ingredients
+        </NavLink>
+      )}
+      {!isLoggedIn && (
+        <NavLink to="/admin/login" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
+          Login/Register
+        </NavLink>
+      )}
       <NavLink to="/admin/checkout" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
         Checkout
       </NavLink>

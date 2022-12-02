@@ -35,6 +35,7 @@ checkoutRouter.post("/", async (req, res) => {
       toJSON: () => string;
     }
 
+    // @ts-ignore
     (BigInt as BigInt).prototype["toJSON"] = function () {
       return this.toString();
     };

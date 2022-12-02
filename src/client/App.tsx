@@ -15,7 +15,7 @@ import LoginPage from "./views/loginRegister";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import PrivateWrapper from "./components/PrivateWrapper";
-import Checkout from "./views/CheckOut";
+import Checkout from "./views/Checkout";
 
 const App = () => {
   return (
