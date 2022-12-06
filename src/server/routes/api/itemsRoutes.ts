@@ -14,7 +14,8 @@ itemsRouter.get("/", async (req, res) => {
     const items = await Items.getAllItems();
     const itemsWithIngredientArray = items.map((item) => ({
       ...item,
-      ingredients: item.ingredients.split(","),
+
+      ingredients: item.ingredients ? item.ingredients.split(",") : [],
     }));
     res.json(itemsWithIngredientArray);
   } catch (error) {
@@ -31,7 +32,7 @@ itemsRouter.get("/:id", async (req, res) => {
     if (item.length) {
       const itemsWithIngredientArray = item.map((item) => ({
         ...item,
-        ingredients: item.ingredients.split(","),
+        ingredients: item.ingredients ? item.ingredients.split(",") : [],
       }));
       res.json(itemsWithIngredientArray[0]);
     } else {

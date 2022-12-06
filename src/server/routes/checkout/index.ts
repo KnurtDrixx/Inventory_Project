@@ -7,6 +7,8 @@ import ItemQueries from "../../database/queries/ItemQueries";
 import { Cart } from "../../types";
 import { randomUUID } from "crypto";
 
+const TAX_RATE = 0.065;
+
 const checkoutRouter = express.Router();
 //current path is /checkout
 
@@ -28,6 +30,9 @@ checkoutRouter.post("/", async (req, res) => {
       if (ItemPrice) sum += ItemPrice.total;
     }
 
+    //this calculates the price of the items in the cart with sales tax
+    const cartPriceWithTax = sum * (1 + TAX_RATE);
+
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description
     // https://github.com/GoogleChromeLabs/jsbi/issues/30#issuecomment-953187833
 
@@ -40,7 +45,7 @@ checkoutRouter.post("/", async (req, res) => {
       return this.toString();
     };
 
-    const body: CreatePaymentRequest = { sourceId: sourceId.token!, idempotencyKey: randomUUID(), amountMoney: { amount: BigInt(sum * 100), currency: "USD" } };
+    const body: CreatePaymentRequest = { sourceId: sourceId.token!, idempotencyKey: randomUUID(), amountMoney: { amount: BigInt(Math.floor(cartPriceWithTax * 100)), currency: "USD" } };
     //this makes the payment request
     const { result } = await squareClient.paymentsApi.createPayment(body);
 

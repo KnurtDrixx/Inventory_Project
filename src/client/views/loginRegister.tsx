@@ -1,5 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { apiService } from "../services/apiService";
 import { TOKENKEY } from "../services/apiService";
 
@@ -7,6 +9,8 @@ const LoginPage = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(true);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+
+  const nav = useNavigate();
 
   const handleLoginRegister = () => {
     const url = isLoggingIn ? "/auth/login" : "/auth/register";
@@ -20,6 +24,7 @@ const LoginPage = () => {
           console.log(`Registered with userID ${data.id}`);
         }
         localStorage.setItem(TOKENKEY, data.token);
+        Swal.fire("Login successful").then(() => nav("/admin/items"));
       })
       .catch((error) => alert(error.message));
   };

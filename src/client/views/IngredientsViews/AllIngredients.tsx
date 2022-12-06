@@ -17,11 +17,11 @@ const AllIngredients = () => {
     <>
       <div>
         <h1>Ingredients List</h1>
-        {ingredients.map((ingredient) => {
-          <Link to={`ingredients/${ingredient.id}`}>
+        {ingredients.map((ingredient) => (
+          <Link to={`/ingredients/${ingredient.id}`}>
             <div>{ingredient.name}</div>
-          </Link>;
-        })}
+          </Link>
+        ))}
         <Link to={`/admin/Ingredients/new`}>Add an Ingredient to the list</Link>
       </div>
     </>

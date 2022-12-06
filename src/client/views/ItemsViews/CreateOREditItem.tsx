@@ -85,9 +85,9 @@ const CreateItems = ({ editMode }: FormProps) => {
     const url = !editMode ? "/api/items" : `/api/items/${id}`;
     apiService(url, method, editItem).then((res) => {
       if (editMode) {
-        nav(`/admin/Items/${id}`);
+        nav(`/admin/Items`);
       } else {
-        nav(`/admin/Items/${res.id}`);
+        nav(`/admin/Items`);
       }
     });
   };

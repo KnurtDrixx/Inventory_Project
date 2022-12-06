@@ -1,12 +1,13 @@
 // to do. make navbar
 import React from "react";
 import { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { apiService } from "../services/apiService";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const nav = useNavigate();
   const loq = useLocation();
 
   useEffect(() => {
@@ -18,6 +19,12 @@ const Navbar = () => {
         setIsLoggedIn(false);
       });
   }, [loq.pathname]);
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    nav("/admin/login");
+  };
 
   return (
     <nav className="nav nav-pills p-2 shadow">
@@ -37,6 +44,12 @@ const Navbar = () => {
       <NavLink to="/admin/checkout" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
         Checkout
       </NavLink>
+
+      {isLoggedIn && (
+        <button onClick={logOut} className="nav-link">
+          Logout
+        </button>
+      )}
     </nav>
   );
 };
