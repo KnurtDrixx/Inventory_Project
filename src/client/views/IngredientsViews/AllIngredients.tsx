@@ -18,7 +18,7 @@ const AllIngredients = () => {
       <div>
         <h1>Ingredients List</h1>
         {ingredients.map((ingredient) => (
-          <Link to={`/ingredients/${ingredient.id}`}>
+          <Link to={`/admin/ingredients/${ingredient.id}`}>
             <div>{ingredient.name}</div>
           </Link>
         ))}
