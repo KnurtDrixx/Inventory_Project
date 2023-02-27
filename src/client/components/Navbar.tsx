@@ -38,8 +38,11 @@ const Navbar = () => {
       )}
       {!isLoggedIn && (
         <NavLink to="/admin/login" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
-          Login/Register
+          Login
         </NavLink>
+        //   <NavLink to="/admin/login" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
+        //   Login/Register
+        // </NavLink>
       )}
       <NavLink to="/admin/checkout" className={({ isActive }) => `nav-link ${isActive && "active"}`}>
         Checkout
